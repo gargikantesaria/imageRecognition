@@ -15,6 +15,7 @@ export class HomePage {
   public imgPreview;
   public itemPicturesStoreURL;
   public imageObjects = [];
+  public faceInImage = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController,
     public imageProvider: ImageProvider, private camera: Camera) {
@@ -24,6 +25,7 @@ export class HomePage {
     this.imgPreview = "/assets/imgs/logo.png";
   }
 
+  // Take a picture from camera or photo library
   getPhoto() {
     this.alertCtrl.create({
       title: 'Profile Picture',
@@ -57,6 +59,7 @@ export class HomePage {
     }).present();
   }
 
+  // Submit the item form
   submitForm() {
     if (this.imageSet) {
       let imageName = 'TestingImage';
@@ -64,6 +67,12 @@ export class HomePage {
         this.itemPicturesStoreURL = res;
         this.imageProvider.getObjectRecognition(res.Bucket, res.Key).then((response:any) => {
           this.imageObjects = [...response.Labels];
+          this.imageProvider.faceDetection(res.Bucket, res.Key).then((detectedData:any) => {
+            console.log("deteceted data is", detectedData);
+            this.faceInImage = detectedData.FaceDetails;
+          }).catch((errs) => {
+            console.log("error in detection data", errs);
+          })
         }).catch((error) => {
           console.log("error detection", error);
         });

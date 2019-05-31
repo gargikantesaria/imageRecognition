@@ -45,6 +45,7 @@ export class ImageProvider {
     })
   }
 
+  // To put the image in S3 Bucket
   s3Putimage(file, key, encoding) {
     return new Promise((resolve, reject) => {
       
@@ -66,7 +67,7 @@ export class ImageProvider {
       });
     })
   }
-
+  // To recognise the objects in the images
   getObjectRecognition(bucketName, imageUrl) {
     return new Promise((resolve, reject) => {
       let rekognition = new AWS.Rekognition();
@@ -87,6 +88,30 @@ export class ImageProvider {
           reject(err);
         } else {
           resolve(data);
+        }
+      })
+    })
+  }
+  // To detect the faces in the image
+  faceDetection(bucketName, imageUrl) {
+    return new Promise((resolve, reject) => {
+      let rekognition = new AWS.Rekognition();
+      let params = {
+        Image: {
+          S3Object: {
+            Bucket: bucketName,
+            Name: 'Artboard 55.png'
+          }
+        },
+        Attributes: [
+          "ALL", "DEFAULT"
+        ]
+      }
+      rekognition.detectFaces(params, (errs, datas) => {
+        if(errs) {
+          reject(errs)
+        } else {
+          resolve(datas);
         }
       })
     })

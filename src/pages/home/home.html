@@ -21,8 +21,8 @@
     <button ion-button (click)="submitForm()" type="submit">Add Item</button>
   </form>
 
-  <ion-list *ngIf="imageObjects?.length > 0">
-    <b>You image consist:</b>
+  <ion-list *ngIf="imageObjects?.length > 0 || faceInImage.length > 0">
+    <b *ngIf="imageObjects?.length > 0">The objects your image consists are:</b>
     <ion-item *ngFor="let item of imageObjects">
       <ion-row>
           <ion-col>
@@ -33,5 +33,6 @@
          </ion-col>
       </ion-row>
     </ion-item>
+    <b>Faces detected in your image are: {{faceInImage?.length}}</b>
   </ion-list>
 </ion-content>
