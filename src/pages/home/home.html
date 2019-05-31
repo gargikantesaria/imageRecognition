@@ -1,14 +1,37 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Fill the Item
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <form [formGroup]="addItemsForm">
+    <ion-item>
+      <ion-label>Title</ion-label>
+      <ion-input type="text" formControlName="itemTitle"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Picture</ion-label>
+      <ion-avatar item-end>
+        <img src="{{ imgPreview }}" (click)="getPhoto()" width="50" style="float:right; border-radius: 100%;">
+      </ion-avatar>
+    </ion-item>
+    <button ion-button (click)="submitForm()" type="submit">Add Item</button>
+  </form>
+
+  <ion-list *ngIf="imageObjects?.length > 0">
+    <b>You image consist:</b>
+    <ion-item *ngFor="let item of imageObjects">
+      <ion-row>
+          <ion-col>
+              <span>{{item.Name}}</span>
+          </ion-col>
+         <ion-col>
+            <span>{{item.Confidence}}</span>
+         </ion-col>
+      </ion-row>
+    </ion-item>
+  </ion-list>
 </ion-content>
