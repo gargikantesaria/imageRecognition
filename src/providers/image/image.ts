@@ -15,8 +15,8 @@ export class ImageProvider {
   }
 
   constructor(private camera: Camera) {
-    AWS.config.accessKeyId = 'AKIAIRKREWE3WERITBUA';
-    AWS.config.secretAccessKey = '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';
+    AWS.config.accessKeyId = 'AWS_ACCESSKEY';
+    AWS.config.secretAccessKey = 'AWS_SECRETKEY';
     AWS.config.region = 'us-east-1';
     AWS.config.signatureVersion = 'v4';
   }
@@ -52,7 +52,7 @@ export class ImageProvider {
 
       const params = {
         Body: file.body,
-        Bucket: 'ionicdemoapp',
+        Bucket: 'BUCKET_NAME',
         Key: key,
         ACL: "public-read",
       };
