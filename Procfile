@@ -1,1 +1,1 @@
-web: npm run build && npm start
+web: npm run build NODE_OPTIONS=--max-old-space-size=4096 && npm start NODE_OPTIONS=--max-old-space-size=4096
