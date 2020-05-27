@@ -62,7 +62,9 @@
       "cordova-plugin-camera": {}
     },
     "platforms": [
-      "ios"
+      "ios",
+      "android",
+      "browser"
     ],
     "engines": {
       "node": "12.1.0",
